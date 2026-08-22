@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Simple EC2 creation
+
+Metadata: 
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: 'Amazon EC2 Configuration'
+        Parameters:
+          - InstanceType
+    ParameterLabels:
+      InstanceType:
+        default: 'Type of EC2 Instance'
+Parameters: 
+  InstanceType:
+    Type: String
+    Default: t4g.micro
+    AllowedValues: 
+      - t4g.nano
+      - t4g.micro
+      - t4g.small
+    Description: 'What type of instance do you want?'
+  LatestAmiId:
+    Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: '/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-arm64'
+
+#Mappings: 
+
+#Conditions: 
+
+Resources:
+  ourInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: !Ref LatestAmiId
+      Tags:
+        - Key: 'department'
+          Value: 'Accounting'
+        - Key: Name
+          Value: compute1
+        
+#Outputs:

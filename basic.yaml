@@ -11,4 +11,13 @@ Description: Hello Template
 Resources: 
   mybucket:
     Type: AWS::S3::Bucket
-#Outputs:
+    Properties:
+      WebsiteConfiguration:
+        RedirectAllRequestsTo:
+          HostName: 'aws.amazon.com'
+Outputs:
+  WebsiteURL:
+    Value: !GetAtt
+      - 'mybucket'
+      - WebsiteURL
+    Description: 'Website URL'
