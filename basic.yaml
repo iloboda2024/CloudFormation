@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Hello Template
+#Metadata: 
+
+#Parameters: 
+
+#Mappings: 
+
+#Conditions: 
+
+Resources: 
+  mybucket:
+    Type: AWS::S3::Bucket
+#Outputs:
